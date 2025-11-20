@@ -3,41 +3,55 @@
 class Program
 {
     static char guessCharacter;
-    static string secretWord = "Zootopia";
+    static string secretWord = "microwave";
     static char[] incorrect = new char[26];
-    static char[] playerKnows = new char[26];
+    static char[] playerKnows = new char[secretWord.Length];
 
     static void Main(string[] args)
     {
-        Console.WriteLine("I've chosen a secret word.  Guess it letter by letter!");
+        while (true)
+        {
         DisplayScreen();
-
-        Console.WriteLine("Hit Enter to continue");
-        Console.ReadLine();
-
-        //Player guessed 'e'
+        UserInteraction();
         GradeGuess();
-        DisplayScreen();
-        Console.WriteLine("Hit Enter to continue");
-        Console.ReadLine();
+            if (IsGameWon() == true)
+            {
+                DisplayScreen();
+                Console.WriteLine("Congrats! You won!");
+                break;
+            }
+            if (IsGameLost())
+            {
+                DisplayScreen();
+                Console.WriteLine("Sorry, you lost.");
+                Console.Write($"Answer was : ");
+                setGreen();
+                Console.WriteLine(secretWord);
+                resetColor();
+                break;
+            }
+        }
+    }
+    static bool IsGameWon()
+    {
 
-        //Player guessed 'f'
-        GradeGuess();
-        DisplayScreen();
-        Console.WriteLine("Hit Enter to continue");
-        Console.ReadLine();
-
-        //Player guessed 'g'
-        GradeGuess();
-        DisplayScreen();
-        Console.WriteLine("Hit Enter to continue");
-        Console.ReadLine();
-
-        //Player guessed 'i'
-        GradeGuess();
-        DisplayScreen();
-        Console.WriteLine("Hit Enter to continue");
-        Console.ReadLine();
+        string pkString = new string(playerKnows);
+        if (secretWord == pkString)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    static bool IsGameLost()
+    {
+        for (int y = 0; y < 8; y++)
+        {
+            if (incorrect[y] == 0) return false;
+        }
+        return true;
     }
     static void UserInteraction()
     {
@@ -59,7 +73,7 @@ class Program
         }
         if (nothingMatches)
         {
-            for(int j = 0; j < incorrect.Length; j++)
+            for(int j = 0; j <= incorrect.Length; j++)
             {
                 if(incorrect[j] == 0)
                 {
@@ -94,7 +108,7 @@ class Program
         }
         Console.WriteLine();
         //Line4
-        for (int x = 0; x < 7; x++)
+        for (int x = 0; x <= 7; x++)
         {
             if (incorrect[x] == 0)
             {
@@ -108,10 +122,6 @@ class Program
             }
         }
         Console.WriteLine();
-
-        //Line5
-
-
     }
     static void setRed()
     {
