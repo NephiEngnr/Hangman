@@ -2,7 +2,8 @@
 
 class Program
 {
-    static string secretWord = "Nephi";
+    static char guessCharacter;
+    static string secretWord = "Zootopia";
     static char[] incorrect = new char[26];
     static char[] playerKnows = new char[26];
 
@@ -15,28 +16,58 @@ class Program
         Console.ReadLine();
 
         //Player guessed 'e'
-        playerKnows[1] = 'e';
+        GradeGuess();
         DisplayScreen();
         Console.WriteLine("Hit Enter to continue");
         Console.ReadLine();
 
         //Player guessed 'f'
-        incorrect[0] = 'f';
+        GradeGuess();
         DisplayScreen();
         Console.WriteLine("Hit Enter to continue");
         Console.ReadLine();
 
         //Player guessed 'g'
-        incorrect[1] = 'g';
+        GradeGuess();
         DisplayScreen();
         Console.WriteLine("Hit Enter to continue");
         Console.ReadLine();
 
         //Player guessed 'i'
-        playerKnows[4] = 'i';
+        GradeGuess();
         DisplayScreen();
         Console.WriteLine("Hit Enter to continue");
         Console.ReadLine();
+    }
+    static void UserInteraction()
+    {
+        Console.WriteLine("Enter a letter");
+        guessCharacter = Console.ReadKey().KeyChar;
+    }
+    static void GradeGuess()
+    {
+        bool nothingMatches = true;
+        int i = 0;
+        foreach (char x in secretWord)
+        {
+            if (x == guessCharacter)
+            {
+                playerKnows[i] = guessCharacter;
+                nothingMatches = false;
+            }
+            i++;
+        }
+        if (nothingMatches)
+        {
+            for(int j = 0; j < incorrect.Length; j++)
+            {
+                if(incorrect[j] == 0)
+                {
+                    incorrect[j] = guessCharacter;
+                    break;
+                }
+            }
+        }
     }
 
     static void DisplayScreen()
