@@ -56,7 +56,9 @@ class Program
             }
             else
             {
+                setGreen();
                 Console.Write(playerKnows[i]);
+                resetColor();
             }
         }
         Console.WriteLine();
@@ -69,13 +71,27 @@ class Program
             }
             else
             {
+                setRed();
                 Console.Write(incorrect[x]);
+                resetColor();
             }
         }
         Console.WriteLine();
-        
-        //Line5
-        
 
+        //Line5
+
+
+    }
+    static void setRed()
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+    }
+    static void resetColor()
+    {
+        Console.ResetColor();
+    }
+    static void setGreen()
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
     }
 }
